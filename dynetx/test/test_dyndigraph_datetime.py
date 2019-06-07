@@ -6,6 +6,9 @@ from datetime import datetime
 
 import dynetx as dn
 
+def from_iso(inp_string):
+    return datetime.strptime(inp_string,
+                             "%Y-%m-%dT%H:%M:%S")
 
 class DynDiGraphTestCase(unittest.TestCase):
     node0uuid = str(uuid.uuid5(uuid.NAMESPACE_OID, 'node0'))
@@ -14,12 +17,12 @@ class DynDiGraphTestCase(unittest.TestCase):
     node3uuid = str(uuid.uuid5(uuid.NAMESPACE_OID, 'node3'))
     node4uuid = str(uuid.uuid5(uuid.NAMESPACE_OID, 'node4'))
     node5uuid = str(uuid.uuid5(uuid.NAMESPACE_OID, 'node5'))
-    t0 = datetime.fromisoformat("2019-06-05T10:10:00")
-    t1 = datetime.fromisoformat("2019-06-05T11:10:00")
-    t2 = datetime.fromisoformat("2019-06-05T12:10:00")
-    t3 = datetime.fromisoformat("2019-06-05T13:10:00")
-    t4 = datetime.fromisoformat("2019-06-05T14:10:00")
-    t5 = datetime.fromisoformat("2019-06-05T15:10:00")
+    t0 = from_iso("2019-06-05T10:10:00")
+    t1 = from_iso("2019-06-05T11:10:00")
+    t2 = from_iso("2019-06-05T12:10:00")
+    t3 = from_iso("2019-06-05T13:10:00")
+    t4 = from_iso("2019-06-05T14:10:00")
+    t5 = from_iso("2019-06-05T15:10:00")
     t0ts = int(t0.timestamp())
     t1ts = int(t1.timestamp())
     t2ts = int(t2.timestamp())
