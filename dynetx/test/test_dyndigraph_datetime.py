@@ -11,6 +11,8 @@ def from_iso(inp_string):
                              "%Y-%m-%dT%H:%M:%S")
 
 class DynDiGraphTestCase(unittest.TestCase):
+    maxDiff = None
+
     node0uuid = str(uuid.uuid5(uuid.NAMESPACE_OID, 'node0'))
     node1uuid = str(uuid.uuid5(uuid.NAMESPACE_OID, 'node1'))
     node2uuid = str(uuid.uuid5(uuid.NAMESPACE_OID, 'node2'))
