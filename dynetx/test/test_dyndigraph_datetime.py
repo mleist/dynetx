@@ -6,9 +6,11 @@ from datetime import datetime
 
 import dynetx as dn
 
+
 def from_iso(inp_string):
     return datetime.strptime(inp_string,
                              "%Y-%m-%dT%H:%M:%S")
+
 
 class DynDiGraphTestCase(unittest.TestCase):
     maxDiff = None
@@ -44,15 +46,14 @@ class DynDiGraphTestCase(unittest.TestCase):
         g.add_interaction(u=self.node0uuid, v=self.node3uuid, t=self.t5ts)
         g.add_interaction(u=self.node0uuid, v=self.node4uuid, t=self.t5ts)
         data = g.nodes(data=True)
-        self.assertEqual(data,
-                         [(self.node4uuid, {'test_param': 'test_val_4'}),
-                          (self.node1uuid, {'test_param': 'test_val_1'}),
-                          (self.node3uuid, {'test_param': 'test_val_3'}),
-                          (self.node5uuid, {'test_param': 'test_val_5'}),
-                          (self.node2uuid, {'test_param': 'test_val_2'}),
-                          (self.node0uuid, {})
-                          ]
-                         )
+        dataDict = {k: v for (k, v) in data}
+        cmpDict = {self.node4uuid: {'test_param': 'test_val_4'},
+                   self.node1uuid: {'test_param': 'test_val_1'},
+                   self.node3uuid: {'test_param': 'test_val_3'},
+                   self.node5uuid: {'test_param': 'test_val_5'},
+                   self.node2uuid: {'test_param': 'test_val_2'},
+                   self.node0uuid: {}}
+        self.assertDictEqual(dataDict, cmpDict)
 
 
 if __name__ == '__main__':
