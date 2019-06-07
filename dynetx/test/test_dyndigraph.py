@@ -322,7 +322,6 @@ class DynDiGraphTestCase(unittest.TestCase):
         self.assertEqual(h.number_of_nodes(), 5)
         self.assertEqual(h.number_of_interactions(), 4)
 
-
         h = g.time_slice(5, 5)
         self.assertIsInstance(h, dn.DynDiGraph)
         self.assertEqual(h.number_of_nodes(), 5)
@@ -348,7 +347,7 @@ class DynDiGraphTestCase(unittest.TestCase):
         g.add_interaction(5, 6, 6)
         g.add_interaction(6, 7, 6)
         g.add_interaction(7, 8, 6)
-        tsd =g.temporal_snapshots_ids()
+        tsd = g.temporal_snapshots_ids()
 
         self.assertEqual(tsd, [5, 6])
 
@@ -441,7 +440,6 @@ class DynDiGraphTestCase(unittest.TestCase):
         ivt = g.inter_in_event_time_distribution(0, 2)
         self.assertDictEqual(ivt, {})
 
-
     def test_stream_interactions(self):
         g = dn.DynDiGraph()
         g.add_interaction(1, 2, 2)
@@ -476,6 +474,7 @@ class DynDiGraphTestCase(unittest.TestCase):
             g.add_interaction(2, 1, 7)
         except:
             pass
+
 
 if __name__ == '__main__':
     unittest.main()

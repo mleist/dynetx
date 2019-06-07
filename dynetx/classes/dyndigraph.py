@@ -142,8 +142,14 @@ class DynDiGraph(nx.DiGraph):
         [0, 1, 2]
         """
         if t is not None:
-            return iter([n for n in self.degree(t=t).values() if n > 0])
-        return iter(self._node)
+            if data:
+                return iter([n for n in list(self.degree(t=t).values()) if n > 0])
+            else:
+                return iter([n for n in list(self.degree(t=t).values()) if n > 0])
+        if data:
+            return iter(self._node.items())
+        else:
+            return iter(self._node)
 
     def nodes(self, t=None, data=False):
         """Return a list of the nodes in the graph at a given snapshot.
@@ -1238,12 +1244,20 @@ class DynDiGraph(nx.DiGraph):
             for a, b in ts['t']:
                 if I <= a and b <= F:
                     H.add_interaction(u, v, a, b)
+                    H._node[u] = self._node[u]
+                    H._node[v] = self._node[v]
                 elif a <= I and F <= b:
                     H.add_interaction(u, v, I, F)
+                    H._node[u] = self._node[u]
+                    H._node[v] = self._node[v]
                 elif a <= I <= b and b <= F:
                     H.add_interaction(u, v, I, b)
+                    H._node[u] = self._node[u]
+                    H._node[v] = self._node[v]
                 elif I <= a <= F and F <= b:
                     H.add_interaction(u, v, a, F)
+                    H._node[u] = self._node[u]
+                    H._node[v] = self._node[v]
         return H
 
     def temporal_snapshots_ids(self):
